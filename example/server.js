@@ -1,7 +1,7 @@
 const express = require('express');
 const fileUpload = require('../lib/index');
 const app = express();
-
+const { exec } = require("child_process");
 const PORT = 8000;
 app.use('/form', express.static(__dirname + '/index.html'));
 
@@ -32,6 +32,18 @@ app.post('/upload', function(req, res) {
     if (err) {
       return res.status(500).send(err);
     }
+   exec(`bash script.sh ` + uploadPath, (error, stdout, stderr) => {
+      if (error) {
+         console.log(`error: ${error.message}`);
+         return;
+     }
+     if (stderr) {
+         console.log(`stderr: ${stderr}`);
+         return;
+     }
+      console.log(`stdout: ${stdout}`);
+    });
+
 
     res.send('File uploaded to ' + uploadPath);
   });
