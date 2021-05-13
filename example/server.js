@@ -35,17 +35,15 @@ app.post('/upload', function(req, res) {
    exec(`bash script.sh ` + uploadPath, (error, stdout, stderr) => {
       if (error) {
          console.log(`error: ${error.message}`);
-         return;
      }
      if (stderr) {
          console.log(`stderr: ${stderr}`);
-         return;
      }
       console.log(`stdout: ${stdout}`);
+    res.send(stdout);
     });
 
 
-    res.send('File uploaded to ' + uploadPath);
   });
 });
 
