@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('../lib/index');
 const app = express();
 const { exec } = require("child_process");
-const PORT = 8000;
+const PORT = 80;
 app.use('/form', express.static(__dirname + '/index.html'));
 
 // default options
